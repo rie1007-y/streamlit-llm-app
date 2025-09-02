@@ -5,14 +5,12 @@ load_dotenv()
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 
-
 import streamlit as st
 # LangChain 本体
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.output_parsers import StrOutputParser
 from langchain_openai import ChatOpenAI  # 追加: ChatOpenAI のインポート
 # ① .env を読み込む：OPENAI_API_KEY を環境変数にセット
-load_dotenv()  # 同じフォルダの .env を自動で読む
 # ここで OS 環境変数に OPENAI_API_KEY が入っているはず
 
 # ② Streamlit 画面の構成
@@ -75,9 +73,9 @@ def ask_llm(user_message: str, mode: str) -> str:
 
     # OpenAI の LLM を準備（モデルは軽めのものを例示）
     # ※ 文字化け防止のため temperature は控えめ
-    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3)
-
-    # 出力は素のテキストとして受け取る
+    # OpenAI の LLM を準備（モデルは軽めのものを例示）
+    # ※ 文字化け防止のため temperature は控えめ
+    llm = ChatOpenAI(model="gpt-4o-mini", temperature=0.3, api_key=OPENAI_API_KEY)
     output_parser = StrOutputParser()
     chain = prompt | llm | output_parser
 
